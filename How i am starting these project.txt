@@ -1,1 +1,138 @@
-1.First going with creating navbar
+1.First going with creating navbar / components
+2.material ui icons we have used
+npm install @mui/icons-material @mui/material @emotion/styled @emotion/react
+
+3.initial code of navbar
+import React from 'react'
+import './navbar.css'
+import MenuIcon from '@mui/icons-material/Menu';
+
+const Navbar = () => {
+  return (
+    <div className='navbar'>
+      <div className="navbar-left">
+        <div className="navbarHamberger">
+          <MenuIcon />
+
+        </div>
+
+      </div>
+    </div>
+  )
+}
+
+export default Navbar
+
+4.first navbar we will create in it we will have navbar inside it navbar-left
+navbar.css
+.navbar{
+    height: 56px;
+    box-sizing: border-box;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    top: 0;
+    position: fixed;
+    background-color: black;
+    z-index: 10;
+}
+
+.navbar-left{
+    gap: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+}
+
+.navbarHamberger{
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+5.in material ui icon if you want to add style we use sx attribute in it.
+<MenuIcon sx={{color:"white"}}/>
+
+6..navbar{
+    height: 56px;
+    box-sizing: border-box;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    top: 0;
+    position: fixed;
+    background-color: black;
+    z-index: 10;
+}
+
+.navbar-left{
+    gap: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+}
+
+.navbarHamberger{
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.navbar_youtubeImg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+}
+.navbar_youtubeImage{
+    color: red;
+}
+.navbar_utubeTitle{
+    font-size: 20px;
+    word-spacing: 0px;
+    letter-spacing: 0px;
+    font-family: "Oswald",sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+7.google font 
+.navbar_utubeTitle {
+    font-size: 20px;
+    word-spacing: 0px;
+    letter-spacing: 0px;
+    font-family: "Outfit", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: <weight>;
+    font-style: normal;
+}
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+
+8.import SearchIcon from '@mui/icons-material/Search';
+import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
+
+9.import VideoCallIcon from '@mui/icons-material/VideoCall';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import PersonIcon from '@mui/icons-material/Person';
+
+10.unknown user
+https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Ffree-photos-vectors%2Funknown-user-symbol&psig=AOvVaw1qAD7b16gXJmhjeqE2plF7&ust=1748926704100000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCPDlrvD50Y0DFQAAAAAdAAAAABAn
+
+  const [userPic,setUserPic] = useState("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Ffree-photos-vectors%2Funknown-user-symbol&psig=AOvVaw1qAD7b16gXJmhjeqE2plF7&ust=1748926704100000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCPDlrvD50Y0DFQAAAAAdAAAAABAn")
+11.
+
