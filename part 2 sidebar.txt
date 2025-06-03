@@ -1,0 +1,16 @@
+1.in page create home and home css 
+2.set javascript in bottom of vs code to javascript jsx to get the snippet
+3.rafce for code snippet of react
+4.now in home component import sidebar
+5.import HomeIcon from '@mui/icons-material/Home';
+6.The shorthand flex: 0.16 1 in CSS is used with Flexbox and is equivalent to:
+
+css
+Copy
+Edit
+flex-grow: 0.16;
+flex-shrink: 1;
+flex-basis: 0;
+❗However, since no third value is explicitly given, flex-basis defaults to 0.
+
+7.import VideocamIcon from '@mui/icons-material/Videocam';
