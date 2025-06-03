@@ -8,17 +8,21 @@ import VideoCallIcon from '@mui/icons-material/VideoCall';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import PersonIcon from '@mui/icons-material/Person';
 
-const Navbar = () => {
+const Navbar = ({setSideNavbarFunc,sideNavbar}) => {
 
   const [userPic, setUserPic] = useState("https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?semt=ais_hybrid&w=740")
   const [navbarModal, setNavbarModal] = useState(false);
   const handleClickModal =()=>{
     setNavbarModal((prev) => !prev);
   }
+const sideNavbarFunc =()=>{
+  setSideNavbarFunc(!sideNavbar);
+}
+
   return (
     <div className='navbar'>
       <div className="navbar-left">
-        <div className="navbarHamberger">
+        <div className="navbarHamberger" onClick={sideNavbarFunc}>
           <MenuIcon sx={{ color: "white" }} />
         </div>
         <div className='navbar_youtubeImg'>

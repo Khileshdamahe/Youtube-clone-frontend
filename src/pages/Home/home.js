@@ -3,10 +3,10 @@ import SideNavbar from '../../components/SideNavbar/sideNavbar'
 import HomePage from '../../components/HomePage/homePage'
 import './home.css'
 
-const Home = () => {
+const Home = ({sideNavbar}) => {
     return (
         <div className='home'>
-            <SideNavbar />
+            <SideNavbar sideNavbar={sideNavbar} />
             <HomePage />
         </div>
     )
