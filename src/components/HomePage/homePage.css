@@ -1,9 +1,17 @@
+.fullHomePage {
+    display: flex;
+    flex-direction: column;
+    
+    flex: 1;
+    min-height: 100vh;
+}
+
 .homePage {
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
     flex: 1;
-    margin-left: 262px;
+    margin-left: 274px;
     min-height: 100vh;
 }
 
