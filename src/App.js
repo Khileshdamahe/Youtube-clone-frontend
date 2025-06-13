@@ -18,7 +18,7 @@ function App() {
       <Navbar setSideNavbarFunc={setSideNavbarFunc} sideNavbar={sideNavbar} />
       <Routes>
         <Route path='/' element={<Home sideNavbar={sideNavbar} />} />
-        <Route path='/video' element={<Video />}/>
+        <Route path='/watch/:id' element={<Video />} />
       </Routes>
     </div>
   );
