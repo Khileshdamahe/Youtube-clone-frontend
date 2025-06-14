@@ -7,6 +7,7 @@ import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
 import VideoCallIcon from '@mui/icons-material/VideoCall';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import PersonIcon from '@mui/icons-material/Person';
+import {Link} from 'react-router-dom';
 
 const Navbar = ({setSideNavbarFunc,sideNavbar}) => {
 
@@ -25,10 +26,10 @@ const sideNavbarFunc =()=>{
         <div className="navbarHamberger" onClick={sideNavbarFunc}>
           <MenuIcon sx={{ color: "white" }} />
         </div>
-        <div className='navbar_youtubeImg'>
+        <Link to={'/'} className='navbar_youtubeImg'>
           <YouTubeIcon sx={{ fontSize: "34px" }} className='navbar_youtubeImage' />
           <div className='navbar_utubeTitle'>YouTube</div>
-        </div>
+        </Link>
       </div>
       <div className="navbar-middle">
         <div className="navbar_searchBox">
