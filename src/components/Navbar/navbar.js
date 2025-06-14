@@ -7,18 +7,24 @@ import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
 import VideoCallIcon from '@mui/icons-material/VideoCall';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import PersonIcon from '@mui/icons-material/Person';
-import {Link} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-const Navbar = ({setSideNavbarFunc,sideNavbar}) => {
+const Navbar = ({ setSideNavbarFunc, sideNavbar }) => {
 
   const [userPic, setUserPic] = useState("https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?semt=ais_hybrid&w=740")
   const [navbarModal, setNavbarModal] = useState(false);
-  const handleClickModal =()=>{
+  const navigate = useNavigate();
+  const handleClickModal = () => {
     setNavbarModal((prev) => !prev);
   }
-const sideNavbarFunc =()=>{
-  setSideNavbarFunc(!sideNavbar);
-}
+  const sideNavbarFunc = () => {
+    setSideNavbarFunc(!sideNavbar);
+  }
+
+  const handleProfile =() =>{
+    navigate('/user/7897'); // it will link to profile page 
+    setNavbarModal(false); // it will close the profile logout and login modal
+  }
 
   return (
     <div className='navbar'>
@@ -43,12 +49,12 @@ const sideNavbarFunc =()=>{
       <div className='navbar-right'>
         <VideoCallIcon sx={{ color: "white", cursor: "pointer", fontSize: "30px" }} />
         <NotificationsIcon sx={{ color: "white", cursor: "pointer", fontSize: "30px" }} />
-        <img src={userPic} className='navbar-right-logo' alt='logo' onClick={handleClickModal}/>
+        <img src={userPic} className='navbar-right-logo' alt='logo' onClick={handleClickModal} />
 
         {
           navbarModal &&
           <div className='navbar-modal'>
-            <div className='navbar-modal-option'>Profile
+            <div className='navbar-modal-option' onClick={handleProfile}>Profile
             </div>
             <div className='navbar-modal-option'>Logout
             </div>
