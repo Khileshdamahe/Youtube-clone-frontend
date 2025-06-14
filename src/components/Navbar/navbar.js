@@ -21,7 +21,7 @@ const Navbar = ({ setSideNavbarFunc, sideNavbar }) => {
     setSideNavbarFunc(!sideNavbar);
   }
 
-  const handleProfile =() =>{
+  const handleProfile = () => {
     navigate('/user/7897'); // it will link to profile page 
     setNavbarModal(false); // it will close the profile logout and login modal
   }
@@ -47,7 +47,9 @@ const Navbar = ({ setSideNavbarFunc, sideNavbar }) => {
         </div>
       </div>
       <div className='navbar-right'>
-        <VideoCallIcon sx={{ color: "white", cursor: "pointer", fontSize: "30px" }} />
+        <Link to={'/763/upload'}>
+          <VideoCallIcon sx={{ color: "white", cursor: "pointer", fontSize: "30px" }} />
+        </Link>
         <NotificationsIcon sx={{ color: "white", cursor: "pointer", fontSize: "30px" }} />
         <img src={userPic} className='navbar-right-logo' alt='logo' onClick={handleClickModal} />
 
