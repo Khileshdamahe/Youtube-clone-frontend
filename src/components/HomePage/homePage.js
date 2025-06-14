@@ -1,5 +1,6 @@
 import React from 'react'
 import "./homePage.css"
+import {Link} from 'react-router-dom';
 
 
 const HomePage = ({ sideNavbar }) => {
@@ -19,7 +20,7 @@ const HomePage = ({ sideNavbar }) => {
         }
       </div>
       <div className={sideNavbar ? "home_mainPage" : "home_mainPageWithoutLink"}>
-        <div className="youtube_Video">
+        <Link to={'/watch/987'} className="youtube_Video">
           <div className='youtube_thumbnailBox'>
             <img src='https://images.pexels.com/photos/6120220/pexels-photo-6120220.jpeg?auto=compress&cs=tinysrgb&w=600' alt='Thumbnail' className='youtube_thumbnailPic' />
             <div className='youtube_timingThumbnail'>
@@ -39,8 +40,8 @@ const HomePage = ({ sideNavbar }) => {
           </div>
 
 
-        </div>
-        <div className="youtube_Video">
+        </Link>
+        <Link to={'/watch/987'} className="youtube_Video">
           <div className='youtube_thumbnailBox'>
             <img src='https://images.pexels.com/photos/6120220/pexels-photo-6120220.jpeg?auto=compress&cs=tinysrgb&w=600' alt='Thumbnail' className='youtube_thumbnailPic' />
             <div className='youtube_timingThumbnail'>
@@ -60,8 +61,8 @@ const HomePage = ({ sideNavbar }) => {
           </div>
 
 
-        </div>
-        <div className="youtube_Video">
+        </Link>
+        <Link to={'/watch/987'} className="youtube_Video">
           <div className='youtube_thumbnailBox'>
             <img src='https://images.pexels.com/photos/6120220/pexels-photo-6120220.jpeg?auto=compress&cs=tinysrgb&w=600' alt='Thumbnail' className='youtube_thumbnailPic' />
             <div className='youtube_timingThumbnail'>
@@ -81,8 +82,8 @@ const HomePage = ({ sideNavbar }) => {
           </div>
 
 
-        </div>
-        <div className="youtube_Video">
+        </Link>
+        <Link to={'/watch/987'} className="youtube_Video">
           <div className='youtube_thumbnailBox'>
             <img src='https://images.pexels.com/photos/6120220/pexels-photo-6120220.jpeg?auto=compress&cs=tinysrgb&w=600' alt='Thumbnail' className='youtube_thumbnailPic' />
             <div className='youtube_timingThumbnail'>
@@ -102,8 +103,8 @@ const HomePage = ({ sideNavbar }) => {
           </div>
 
 
-        </div>
-        <div className="youtube_Video">
+        </Link>
+        <Link to={'/watch/987'} className="youtube_Video">
           <div className='youtube_thumbnailBox'>
             <img src='https://images.pexels.com/photos/6120220/pexels-photo-6120220.jpeg?auto=compress&cs=tinysrgb&w=600' alt='Thumbnail' className='youtube_thumbnailPic' />
             <div className='youtube_timingThumbnail'>
@@ -123,8 +124,8 @@ const HomePage = ({ sideNavbar }) => {
           </div>
 
 
-        </div>
-        <div className="youtube_Video">
+        </Link>
+        <Link to={'/watch/987'} className="youtube_Video">
           <div className='youtube_thumbnailBox'>
             <img src='https://images.pexels.com/photos/6120220/pexels-photo-6120220.jpeg?auto=compress&cs=tinysrgb&w=600' alt='Thumbnail' className='youtube_thumbnailPic' />
             <div className='youtube_timingThumbnail'>
@@ -144,7 +145,7 @@ const HomePage = ({ sideNavbar }) => {
           </div>
 
 
-        </div>
+        </Link>
 
       </div>
     </div>
