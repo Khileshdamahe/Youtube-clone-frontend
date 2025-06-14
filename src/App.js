@@ -4,6 +4,7 @@ import Home from './pages/Home/home';
 import { useState } from 'react'
 import { Route, Routes } from 'react-router-dom';
 import Video from './pages/Video/video';
+import Profile from './pages/Profile/profile';
 
 function App() {
 
@@ -19,6 +20,8 @@ function App() {
       <Routes>
         <Route path='/' element={<Home sideNavbar={sideNavbar} />} />
         <Route path='/watch/:id' element={<Video />} />
+        <Route path='/user/:id' element={<Profile sideNavbar={sideNavbar}  />} />
+
       </Routes>
     </div>
   );
