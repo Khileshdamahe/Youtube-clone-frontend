@@ -21,9 +21,9 @@ const SignUp = () => {
 
 
                     <div className="image_upload_signup">
-                        <input type='file'/>
+                        <input type='file' />
                         <div className="image_upload_signup_div">
-                            <img className='image_default_signUp' src='https://randomwordgenerator.com/img/picture-generator/50e5d6474e5bb10ff3d8992cc12c30771037dbf85254784d712f7dd59245_640.jpg' alt='khilesh'/>
+                            <img className='image_default_signUp' src='https://randomwordgenerator.com/img/picture-generator/50e5d6474e5bb10ff3d8992cc12c30771037dbf85254784d712f7dd59245_640.jpg' alt='khilesh' />
                         </div>
 
 
@@ -32,7 +32,7 @@ const SignUp = () => {
 
                     <div className="signUpBtns">
                         <div className="signUpBtn">SignUp</div>
-                        <div className="signUpBtn">Home Page</div>
+                        <Link to={'/'} className="signUpBtn">Home Page</Link>
 
                     </div>
 
