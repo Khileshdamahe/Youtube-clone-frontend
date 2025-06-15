@@ -8,12 +8,14 @@ import VideoCallIcon from '@mui/icons-material/VideoCall';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import PersonIcon from '@mui/icons-material/Person';
 import { Link, useNavigate } from 'react-router-dom';
+import Login from '../Login/login';
 
 const Navbar = ({ setSideNavbarFunc, sideNavbar }) => {
 
   const [userPic, setUserPic] = useState("https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?semt=ais_hybrid&w=740")
   const [navbarModal, setNavbarModal] = useState(false);
   const navigate = useNavigate();
+  const [login, setLogin] = useState(false);
   const handleClickModal = () => {
     setNavbarModal((prev) => !prev);
   }
@@ -24,6 +26,17 @@ const Navbar = ({ setSideNavbarFunc, sideNavbar }) => {
   const handleProfile = () => {
     navigate('/user/7897'); // it will link to profile page 
     setNavbarModal(false); // it will close the profile logout and login modal
+  }
+
+
+  const onClickOfPopUpOtion = (button) => {
+    setNavbarModal(false)
+    if (button === "login") {
+      setLogin(true)
+
+    } else {
+
+    }
   }
 
   return (
@@ -58,15 +71,18 @@ const Navbar = ({ setSideNavbarFunc, sideNavbar }) => {
           <div className='navbar-modal'>
             <div className='navbar-modal-option' onClick={handleProfile}>Profile
             </div>
-            <div className='navbar-modal-option'>Logout
+            <div className='navbar-modal-option' onClick={() => onClickOfPopUpOtion("logout")}>Logout
             </div>
-            <div className='navbar-modal-option'>Login
+            <div className='navbar-modal-option' onClick={() => onClickOfPopUpOtion("login")}>Login
             </div>
           </div>
         }
 
 
       </div>
+      {
+        login && <Login />
+      }
 
     </div>
   )
