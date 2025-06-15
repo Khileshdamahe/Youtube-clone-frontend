@@ -28,6 +28,9 @@ const Navbar = ({ setSideNavbarFunc, sideNavbar }) => {
     setNavbarModal(false); // it will close the profile logout and login modal
   }
 
+  const setLoginModal = () =>{
+    setLogin(false);
+  }
 
   const onClickOfPopUpOtion = (button) => {
     setNavbarModal(false)
@@ -38,6 +41,7 @@ const Navbar = ({ setSideNavbarFunc, sideNavbar }) => {
 
     }
   }
+
 
   return (
     <div className='navbar'>
@@ -81,7 +85,7 @@ const Navbar = ({ setSideNavbarFunc, sideNavbar }) => {
 
       </div>
       {
-        login && <Login />
+        login && <Login setLoginModal={setLoginModal}/>
       }
 
     </div>

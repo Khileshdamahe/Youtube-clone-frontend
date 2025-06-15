@@ -4,7 +4,7 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import { Link } from 'react-router-dom';
 
 
-const Login = () => {
+const Login = ({setLoginModal}) => {
     return (
         <div className='login'>
             <div className="login_card">
@@ -24,7 +24,7 @@ const Login = () => {
                 <div className="login_buttons">
                     <div className="login-btn">Login</div>
                     <div className="login-btn">SignUp</div>
-                    <div className="login-btn">Cancel</div>
+                    <div className="login-btn" onClick={()=>setLoginModal()}>Cancel</div>
                 </div>
             </div>
 
