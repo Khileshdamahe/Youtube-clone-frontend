@@ -1,0 +1,4 @@
+1.create account in cloudinary
+2.make youtube-clone in preset on cloudinary
+3.uploadImage 
+4.install axios

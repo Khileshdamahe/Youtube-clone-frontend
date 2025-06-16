@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import './signUp.css';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const SignUp = () => {
-    const [signUpFiled, setSignUpField] = useState({ "channelName": "", "userName": "", "password": "", "about": "", "profilePic": "" });
     const [uploadedImageUrl, setUploadedImageUrl] = useState("https://th.bing.com/th/id/OIP.Wy2uo_y-ttULYs4chLmqSAAAAA?rs=1&pid=ImgDetMain");
+    const [signUpFiled, setSignUpField] = useState({ "channelName": "", "userName": "", "password": "", "about": "", "profilePic": uploadedImageUrl });
+
     console.log(signUpFiled)
 
 
@@ -16,7 +18,30 @@ const SignUp = () => {
         })
     }
 
+    const uploadImage = async (e) => {
+        console.log("Uploading")
+        const files = e.target.files;
+        const data = new FormData();
+        data.append('file', files[0]);
+        // youtube-clone
+        data.append('upload_preset', 'youtube-clone');
+        try {
+            // cloudName="dzeto1whz" for khileshcloud
 
+            const response = await axios.post("https://api.cloudinary.com/v1_1/dzeto1whz/image/upload", data);
+            // console.log(response);
+
+            const imageUrl = response.data.url;
+            setUploadedImageUrl(imageUrl);
+            setSignUpField({
+                ...signUpFiled, "profilePic": imageUrl
+            })
+        } catch (err) {
+            console.log(err)
+        }
+
+
+    }
     return (
         <div className='signUp'>
             <div className="signup_card">
@@ -34,7 +59,7 @@ const SignUp = () => {
 
 
                     <div className="image_upload_signup">
-                        <input type='file' />
+                        <input type='file' onChange={(e) => uploadImage(e)} />
                         <div className="image_upload_signup_div">
                             <img className='image_default_signUp' src={uploadedImageUrl} alt='khilesh' />
                         </div>
