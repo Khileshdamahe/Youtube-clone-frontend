@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import './videoUpload.css';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 
 const VideoUpload = () => {
@@ -13,7 +16,39 @@ const VideoUpload = () => {
             ...inputField, [name]: event.target.value
         })
     }
-    console.log(inputField)
+
+    const uploadImage = async (e, type) => {
+        setLoader(true)
+        console.log("Uploading")
+        const files = e.target.files;
+        const data = new FormData();
+        data.append('file', files[0]);
+        // youtube-clone
+        data.append('upload_preset', 'youtube-clone');
+        try {
+
+            // cloudName="dzeto1whz" for khileshcloud
+
+
+            const response = await axios.post(`https://api.cloudinary.com/v1_1/dzeto1whz/${type}/upload`, data);
+            const url = response.data.url;
+
+            setLoader(false);
+
+            let val = type === "image" ? "thumbnail" : "videoLink";
+            setInputField({
+                ...inputField, [val]: url
+            })
+
+            // console.log(url);
+
+        } catch (err) {
+            setLoader(false)
+            console.log(err)
+        }
+
+
+    }
 
 
     return (
@@ -30,8 +65,15 @@ const VideoUpload = () => {
                     <input type='text' value={inputField.description} onChange={(e) => { handleOnChangeInput(e, "description") }} placeholder='Description' className='uploadFormInputs' />
                     <input type='text' value={inputField.videoType} onChange={(e) => { handleOnChangeInput(e, "videoType") }} placeholder='Category' className='uploadFormInputs' />
 
-                    <div>Thumbnail<input type='file' accept='image/*' /></div>
-                    <div>Video <input type='file' accept='video/mp4,video/webm,video/*' /></div>
+                    <div>Thumbnail<input type='file' accept='image/*' onChange={(e) => uploadImage(e, "image")} /></div>
+                    <div>Video <input type='file' accept='video/mp4,video/webm,video/*' onChange={(e) => uploadImage(e, "video")} /></div>
+
+
+                    {
+                        loader && <Box sx={{ display: 'flex' }}>
+                            <CircularProgress />
+                        </Box>
+                    }
 
                 </div>
 
