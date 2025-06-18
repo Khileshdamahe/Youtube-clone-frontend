@@ -3,11 +3,15 @@ import './signUp.css';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify'
+import Box from '@mui/material/Box';
+import LinearProgress from '@mui/material/LinearProgress';
 
 const SignUp = () => {
     const [uploadedImageUrl, setUploadedImageUrl] = useState("https://th.bing.com/th/id/OIP.Wy2uo_y-ttULYs4chLmqSAAAAA?rs=1&pid=ImgDetMain");
     const [signUpFiled, setSignUpField] = useState({ "channelName": "", "userName": "", "password": "", "about": "", "profilePic": uploadedImageUrl });
-
+    const [progressBar, setProgressBar] = useState(false);
+    const navigate = useNavigate();
     console.log(signUpFiled)
 
 
@@ -28,8 +32,11 @@ const SignUp = () => {
         try {
             // cloudName="dzeto1whz" for khileshcloud
 
+            setProgressBar(true)
+
             const response = await axios.post("https://api.cloudinary.com/v1_1/dzeto1whz/image/upload", data);
             // console.log(response);
+            setProgressBar(false)
 
             const imageUrl = response.data.url;
             setUploadedImageUrl(imageUrl);
@@ -42,6 +49,24 @@ const SignUp = () => {
 
 
     }
+
+    const handleSignup = async () => {
+        setProgressBar(true);
+        axios.post('http://localhost:4000/auth/signUp', signUpFiled).then((res) => {
+            // console.log(res)
+            toast.success(res.data.message);
+            setProgressBar(false);
+            navigate('/');
+        }).catch(err => {
+            // console.log(err)
+            setProgressBar(false);
+            toast.error(err)
+        })
+
+    }
+
+
+
     return (
         <div className='signUp'>
             <div className="signup_card">
@@ -69,16 +94,23 @@ const SignUp = () => {
 
 
                     <div className="signUpBtns">
-                        <div className="signUpBtn">SignUp</div>
+                        <div className="signUpBtn" onClick={handleSignup}>SignUp</div>
                         <Link to={'/'} className="signUpBtn">Home Page</Link>
 
                     </div>
+                    {progressBar && <Box sx={{ width: '100%' }}>
+                        <LinearProgress />
+                    </Box>}
+
 
 
 
                 </div>
 
             </div>
+
+            <ToastContainer />
+
 
         </div>
     )
