@@ -1,31 +1,63 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './video.css';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import ThumbDownAltOutlinedIcon from '@mui/icons-material/ThumbDownAltOutlined';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const Video = () => {
     const [message, setMessage] = useState("");
-    console.log(message);
+    const [data, setData] = useState(null);
+    const { id } = useParams();
+    const [videoUrl, setVideoURL] = useState("");
+    const [comments, setComments] = useState([]);
+    // console.log(id);
+    // console.log(message);
+
+    const fetchVedioById = async () => {
+        await axios.get(`http://localhost:4000/api/getVideoById/${id}`).then((response) => {
+            console.log(response.data.video);
+            setData(response.data.video)
+            setVideoURL(response.data.video.videoLink)
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
+    const getCommentByVideoId = async () => {
+        await axios.get(`http://localhost:4000/commentApi/comment/${id}`).then((response) => {
+            console.log(response);
+            setComments(response.data.comments)
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
+
+    useEffect(() => {
+        fetchVedioById();
+        getCommentByVideoId();
+    }, [])
+
     return (
         <div className='video'>
             <div className="videoPostSection">
                 <div className="video_youtube">
-                    <video width="400" controls autoPlay className='video_youtube_video'>
-                        <source src='https://res.cloudinary.com/dzeto1whz/video/upload/v1749796642/samples/dance-2.mp4' type='video/mp4' />
-                        <source src='https://res.cloudinary.com/dzeto1whz/video/upload/v1749796642/samples/dance-2.mp4' type='video/webm' />
-                    </video>
+                    {data && <video width="400" controls autoPlay className='video_youtube_video'>
+                        <source src={videoUrl} type='video/mp4' />
+                        <source src={videoUrl} type='video/webm' />
+                    </video>}
                 </div>
                 <div className="video_youtubeAbout">
-                    <div className="video_uTubeTitle">{"Javascript for begineer"}</div>
+                    <div className="video_uTubeTitle">{data?.title}</div>
                     <div className="youtube_video_ProfileBlock">
                         <div className="youtube_video_ProfileBlock_left">
-                            <Link to={'/user/7868'} className="youtube_video_ProfileBlock_left_img">
-                                <img className='youtube_video_ProfileBlock_left_image' src={"https://images.unsplash.com/photo-1493612276216-ee3925520721?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tfGVufDB8fDB8fHww"} alt='khilesh' />
+                            <Link to={`/user/${data?.user?._id}`} className="youtube_video_ProfileBlock_left_img">
+                                <img className='youtube_video_ProfileBlock_left_image' src={data?.user?.profilePic} alt='khilesh' />
                             </Link>
                             <div className="youtubeVideo_subsView">
-                                <div className="youtubePostProfileName"> {"User1"} </div>
-                                <div className="youtubePostProfileSubs">{"2024-07-09"}</div>
+                                <div className="youtubePostProfileName"> {data?.user?.channelName} </div>
+                                <div className="youtubePostProfileSubs">{data?.user?.createdAt.slice(0, 10)}</div>
                             </div>
                             <div className="subscribeBtnYoutube">Subscribe</div>
                         </div>
@@ -33,7 +65,7 @@ const Video = () => {
                         <div className="youtube_video_likeBlock">
                             <div className="youtube_video_likeBlock_Like">
                                 <ThumbUpOutlinedIcon />
-                                <div className="youtube_video_likeBlock_NoOfLikes">{32}</div>
+                                <div className="youtube_video_likeBlock_NoOfLikes">{data?.like}</div>
                             </div>
                             <div className="youtubeVideoDivider"></div>
                             <div className="youtube_video_likeBlock_Like">
@@ -47,11 +79,11 @@ const Video = () => {
 
                     </div>
                     <div className="youtube_video_About">
-                        <div>2024-09-30</div>
-                        <div>This is the cool video</div>
+                        <div>{data?.createdAt.slice(0, 10)}</div>
+                        <div>{data?.description}</div>
                     </div>
                     <div className="youtubeCommentSection">
-                        <div className="youtubeCommentSectionTitle">2 Comments</div>
+                        <div className="youtubeCommentSectionTitle">{comments.length} Comments</div>
 
                         <div className="youtubeSelfComment">
                             <img className='video_youtubeSelfCommentProfile' src='https://media.istockphoto.com/id/2027127656/photo/vibrant-colored-closed-wooden-doors-in-a-row-on-blue-sky-and-sea-background-choice-and.webp?a=1&b=1&s=612x612&w=0&k=20&c=i_Ymb_iVtRFAdccY2x7dRarxDCyII1k2XEDU3MVGL4w=' alt='khilesh' />
@@ -67,63 +99,32 @@ const Video = () => {
                         </div>
 
                         <div className="youtubeOthersComments">
-                            <div className="youtubeSelfComment">
-                                <img className='video_youtubeSelfCommentProfile' src='https://media.istockphoto.com/id/2027127656/photo/vibrant-colored-closed-wooden-doors-in-a-row-on-blue-sky-and-sea-background-choice-and.webp?a=1&b=1&s=612x612&w=0&k=20&c=i_Ymb_iVtRFAdccY2x7dRarxDCyII1k2XEDU3MVGL4w=' alt='khilesh' />
-                                <div className='others_commentSection'>
-                                    <div className='others_commentSectionHeader'>
-                                        <div className='channelName_comment'>UserName
+                            {
+                                comments.map((item, index) => {
+                                    return (
+                                        <div className="youtubeSelfComment">
+                                            <img className='video_youtubeSelfCommentProfile' src={item?.user?.profilePic} alt='khilesh' />
+                                            <div className='others_commentSection'>
+                                                <div className='others_commentSectionHeader'>
+                                                    <div className='channelName_comment'>{item?.user?.channelName}
+                                                    </div>
+                                                    <div className='commentTimingOthers'>{item?.createdAt.slice(0,10)}
+                                                    </div>
+
+
+                                                </div>
+                                                <div className='otherCommentSectionComment'>
+                                                   {item?.message}
+                                                </div>
+
+                                            </div>
+
+
                                         </div>
-                                        <div className='commentTimingOthers'>2024-09-30
-                                        </div>
+                                    )
+                                })
+                            }
 
-
-                                    </div>
-                                    <div className='otherCommentSectionComment'>
-                                        This is the cool Web App Project
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                            <div className="youtubeSelfComment">
-                                <img className='video_youtubeSelfCommentProfile' src='https://media.istockphoto.com/id/2027127656/photo/vibrant-colored-closed-wooden-doors-in-a-row-on-blue-sky-and-sea-background-choice-and.webp?a=1&b=1&s=612x612&w=0&k=20&c=i_Ymb_iVtRFAdccY2x7dRarxDCyII1k2XEDU3MVGL4w=' alt='khilesh' />
-                                <div className='others_commentSection'>
-                                    <div className='others_commentSectionHeader'>
-                                        <div className='channelName_comment'>UserName
-                                        </div>
-                                        <div className='commentTimingOthers'>2024-09-30
-                                        </div>
-
-
-                                    </div>
-                                    <div className='otherCommentSectionComment'>
-                                        This is the cool Web App Project
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                            <div className="youtubeSelfComment">
-                                <img className='video_youtubeSelfCommentProfile' src='https://media.istockphoto.com/id/2027127656/photo/vibrant-colored-closed-wooden-doors-in-a-row-on-blue-sky-and-sea-background-choice-and.webp?a=1&b=1&s=612x612&w=0&k=20&c=i_Ymb_iVtRFAdccY2x7dRarxDCyII1k2XEDU3MVGL4w=' alt='khilesh' />
-                                <div className='others_commentSection'>
-                                    <div className='others_commentSectionHeader'>
-                                        <div className='channelName_comment'>UserName
-                                        </div>
-                                        <div className='commentTimingOthers'>2024-09-30
-                                        </div>
-
-
-                                    </div>
-                                    <div className='otherCommentSectionComment'>
-                                        This is the cool Web App Project
-                                    </div>
-
-                                </div>
-
-
-                            </div>
                         </div>
                     </div>
                 </div>

@@ -7,8 +7,7 @@
     align-items: center;
     /* justify-content: center; */
     height: 100vh;
-    background-color: black;
-    color: white;
+    background-color: rgb(0, 0, 0);
 }
 .signup_card{
     width: 40%;
