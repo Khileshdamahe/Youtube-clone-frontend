@@ -86,12 +86,12 @@ const Navbar = ({ setSideNavbarFunc, sideNavbar }) => {
         {
           navbarModal &&
           <div className='navbar-modal'>
-            <div className='navbar-modal-option' onClick={handleProfile}>Profile
-            </div>
-            <div className='navbar-modal-option' onClick={() => onClickOfPopUpOtion("logout")}>Logout
-            </div>
-            <div className='navbar-modal-option' onClick={() => onClickOfPopUpOtion("login")}>Login
-            </div>
+            {isLogedIn && <div className='navbar-modal-option' onClick={handleProfile}>Profile
+            </div>}
+            {isLogedIn && <div className='navbar-modal-option' onClick={() => onClickOfPopUpOtion("logout")}>Logout
+            </div>}
+            {!isLogedIn && <div className='navbar-modal-option' onClick={() => onClickOfPopUpOtion("login")}>Login
+            </div>}
           </div>
         }
 
