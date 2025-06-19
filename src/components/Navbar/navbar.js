@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './navbar.css'
 import MenuIcon from '@mui/icons-material/Menu';
 import YouTubeIcon from '@mui/icons-material/YouTube';
@@ -16,6 +16,10 @@ const Navbar = ({ setSideNavbarFunc, sideNavbar }) => {
   const [navbarModal, setNavbarModal] = useState(false);
   const navigate = useNavigate();
   const [login, setLogin] = useState(false);
+  const [isLogedIn, setIsLogedIn] = useState(false)
+
+
+
   const handleClickModal = () => {
     setNavbarModal((prev) => !prev);
   }
@@ -28,7 +32,7 @@ const Navbar = ({ setSideNavbarFunc, sideNavbar }) => {
     setNavbarModal(false); // it will close the profile logout and login modal
   }
 
-  const setLoginModal = () =>{
+  const setLoginModal = () => {
     setLogin(false);
   }
 
@@ -42,6 +46,15 @@ const Navbar = ({ setSideNavbarFunc, sideNavbar }) => {
     }
   }
 
+
+  useEffect(() => {
+    let userProfilePic = localStorage.getItem("userProfilePic");
+    setIsLogedIn(localStorage.getItem("userId") !== null ? true : false);
+    if (userProfilePic !== null) {
+      setUserPic(userProfilePic)
+    }
+
+  }, [])
 
   return (
     <div className='navbar'>
@@ -85,7 +98,7 @@ const Navbar = ({ setSideNavbarFunc, sideNavbar }) => {
 
       </div>
       {
-        login && <Login setLoginModal={setLoginModal}/>
+        login && <Login setLoginModal={setLoginModal} />
       }
 
     </div>
