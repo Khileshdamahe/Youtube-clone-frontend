@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './videoUpload.css';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import { Link, useNavigate } from 'react-router-dom';
@@ -50,6 +50,12 @@ const VideoUpload = () => {
 
     }
 
+    useEffect(() => {
+        let isLogin = localStorage.getItem("userId");
+        if (isLogin === null) {
+            navigate('/')
+        }
+    }, [])
 
     return (
         <div className='videoUpload'>

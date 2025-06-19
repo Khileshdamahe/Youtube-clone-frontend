@@ -9,6 +9,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import PersonIcon from '@mui/icons-material/Person';
 import { Link, useNavigate } from 'react-router-dom';
 import Login from '../Login/login';
+import axios from 'axios';
 
 const Navbar = ({ setSideNavbarFunc, sideNavbar }) => {
 
@@ -28,8 +29,13 @@ const Navbar = ({ setSideNavbarFunc, sideNavbar }) => {
   }
 
   const handleProfile = () => {
-    navigate('/user/7897'); // it will link to profile page 
-    setNavbarModal(false); // it will close the profile logout and login modal
+    // navigate('/user/7897'); // it will link to profile page 
+    // setNavbarModal(false); // it will close the profile logout and login modal
+
+
+    let userId = localStorage.getItem("userId")
+    navigate(`/user/${userId}`);
+    setNavbarModal(false);
   }
 
   const setLoginModal = () => {
@@ -42,9 +48,23 @@ const Navbar = ({ setSideNavbarFunc, sideNavbar }) => {
       setLogin(true)
 
     } else {
-
+      localStorage.clear();
+      getLogoutFun();
+      setTimeout(() => {
+        navigate('/')
+        window.location.reload();
+      }, 2000);
     }
   }
+
+  const getLogoutFun = async () => {
+    axios.post("http://localhost:4000/auth/logout", {}, { withCredentials: true }).then((res) => {
+      console.log("Logout ")
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+
 
 
   useEffect(() => {
