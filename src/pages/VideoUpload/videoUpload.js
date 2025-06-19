@@ -57,6 +57,20 @@ const VideoUpload = () => {
         }
     }, [])
 
+
+    const handleSubmitFunc = async () => {
+        setLoader(true)
+        await axios.post('http://localhost:4000/api/video', inputField, { withCredentials: true }).then((resp) => {
+            console.log(resp)
+            navigate('/')
+            setLoader(false);
+        }).catch(err => {
+            console.log(err)
+             setLoader(false);
+        })
+
+    }
+
     return (
         <div className='videoUpload'>
             <div className="uploadBox">
@@ -87,7 +101,7 @@ const VideoUpload = () => {
 
 
                 <div className="uploadBtns">
-                    <div className="uploadBtn-form">Upload</div>
+                    <div className="uploadBtn-form" onClick={handleSubmitFunc}>Upload</div>
                     <Link to={'/'} className="uploadBtn-form">Home</Link>
 
                 </div>

@@ -24,7 +24,7 @@ const Login = ({ setLoginModal }) => {
 
     const handleLoginFun = async () => {
         setLoader(true)
-        axios.post("http://localhost:4000/auth/login", loginField).then((resp => {
+        axios.post("http://localhost:4000/auth/login", loginField, { withCredentials: true }).then((resp => {
             setLoader(false)
             // console.log(resp)
             localStorage.setItem("token", resp.data.token)
@@ -64,7 +64,7 @@ const Login = ({ setLoginModal }) => {
 
                 {loader && <Box sx={{ width: '100%' }}>
                     <LinearProgress />
-                </Box> }
+                </Box>}
 
 
 
